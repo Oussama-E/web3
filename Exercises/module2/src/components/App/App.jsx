@@ -11,16 +11,19 @@ const App = () => {
   const changeCount = (delta) => {
     console.log('delta =', delta);
       if(delta>0){
-         setCounter(counter + 1);
-         localStorage.setItem("counter", JSON.stringify(counter+1));
+        const newCount = counter + 1;
+        setCounter(newCount);
+        localStorage.setItem("counter", JSON.stringify(newCount));
       }
       else if(delta===0){
+        const newCount = counter - counter;
         setCounter(counter - counter);
-        localStorage.setItem("counter", JSON.stringify(counter-counter));
+        localStorage.setItem("counter", JSON.stringify(newCount));
       }
       else{
+        const newCount = counter - 1;
         setCounter(counter - 1);
-        localStorage.setItem("counter", JSON.stringify(counter-1));
+        localStorage.setItem("counter", JSON.stringify(newCount));
       }
   }
 
