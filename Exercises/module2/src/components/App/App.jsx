@@ -4,19 +4,23 @@ import { useState } from 'react'
 
 const App = () => {
 
-  const [ counter, setCounter ] = useState(0)
+  let value = JSON.parse(localStorage.getItem("counter"));
+  const [ counter, setCounter ] = useState(value)
   console.log('rendering with counter value', counter)
 
   const changeCount = (delta) => {
     console.log('delta =', delta);
       if(delta>0){
          setCounter(counter + 1);
+         localStorage.setItem("counter", JSON.stringify(counter+1));
       }
       else if(delta===0){
         setCounter(counter - counter);
+        localStorage.setItem("counter", JSON.stringify(counter-counter));
       }
       else{
         setCounter(counter - 1);
+        localStorage.setItem("counter", JSON.stringify(counter-1));
       }
   }
 
