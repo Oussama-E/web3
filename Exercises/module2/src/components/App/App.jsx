@@ -7,33 +7,41 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
   console.log('rendering with counter value', counter)
 
-  const increaseByOne = () => {
-    console.log('increasing, value before', counter)
-    setCounter(counter + 1)
+  const handleClick = (e) => {
+    const delta = parseInt(e.target.dataset.delta);
+    console.log('e =', e);
+      if(delta>0){
+         setCounter(counter + 1);
+      }
+      else if(delta===0){
+        setCounter(counter - counter);
+      }
+      else{
+        setCounter(counter - 1);
+      }
   }
 
-  const decreaseByOne = () => {
-    console.log('decreasing, value before', counter)
-    setCounter(counter - 1)
+  const changeCount = (e) => {
+    console.log('value before', counter);
+    handleClick(e);
   }
 
-  const setToZero = () => {
-    console.log('resetting to zero, value before', counter)
-    setCounter(0)
-  }
   return (
     <div>
       <Display counter = {counter} />
       <Button
-        handleClick={increaseByOne}
+        delta={1}
+        handleClick={changeCount}
         text='plus'
       />
       <Button
-        handleClick={setToZero}
+        delta={0}
+        handleClick={changeCount}
         text='zero'
       />     
       <Button
-        handleClick={decreaseByOne}
+        delta={-1}
+        handleClick={changeCount}
         text='minus'
       />           
     </div>

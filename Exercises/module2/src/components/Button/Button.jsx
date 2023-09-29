@@ -1,4 +1,7 @@
-const Button = ({handleClick, text}) => <button onClick={handleClick}> {text} </button>
-  
+const Button = ({ delta, handleClick, text }) => (
+  <button data-delta={delta} onClick={handleClick}>
+    {text}
+  </button>
+);
 
-  export default Button
+export default Button;
