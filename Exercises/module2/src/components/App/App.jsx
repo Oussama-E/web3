@@ -7,9 +7,8 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
   console.log('rendering with counter value', counter)
 
-  const handleClick = (e) => {
-    const delta = parseInt(e.target.dataset.delta);
-    console.log('e =', e);
+  const changeCount = (delta) => {
+    console.log('delta =', delta);
       if(delta>0){
          setCounter(counter + 1);
       }
@@ -21,27 +20,28 @@ const App = () => {
       }
   }
 
-  const changeCount = (e) => {
+  const handleClick = (e) => {
     console.log('value before', counter);
-    handleClick(e);
+    const delta = parseInt(e.target.dataset.delta);
+    changeCount(delta);
   }
 
   return (
     <div>
       <Display counter = {counter} />
       <Button
+        handleClick={handleClick}
         delta={1}
-        handleClick={changeCount}
         text='plus'
       />
       <Button
+        handleClick={handleClick}
         delta={0}
-        handleClick={changeCount}
         text='zero'
       />     
       <Button
+        handleClick={handleClick}
         delta={-1}
-        handleClick={changeCount}
         text='minus'
       />           
     </div>

@@ -1,5 +1,5 @@
 const Button = ({ delta, handleClick, text }) => (
-  <button data-delta={undefined} onClick={handleClick}>
+  <button data-delta={delta} onClick={handleClick}>
     {text}
   </button>
 );
