@@ -13,11 +13,11 @@ const App = () => {
       if(delta>0){
          setCounter(counter + 1);
       }
-      else if(delta<1){
-        setCounter(counter - 1);
+      else if(delta===0){
+        setCounter(counter - counter);
       }
       else{
-        setCounter(counter - counter);
+        setCounter(counter - 1);
       }
   }
 
@@ -30,17 +30,17 @@ const App = () => {
     <div>
       <Display counter = {counter} />
       <Button
-        data-delta={1}
+        delta={1}
         handleClick={changeCount}
         text='plus'
       />
       <Button
-        data-delta={0}
+        delta={0}
         handleClick={changeCount}
         text='zero'
       />     
       <Button
-        data-delta={-1}
+        delta={-1}
         handleClick={changeCount}
         text='minus'
       />           
