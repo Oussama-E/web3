@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from '../Button/Button'
 import Statistics from '../Statistics/Statistics'
+import Loading from '../Loading/Loading'
 
 
 const App = () => {
@@ -13,8 +14,13 @@ const App = () => {
   const [average, setAverage] = useState(0)
   const [positive, setPositive] = useState(0)
   const [total, setTotal] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const timeout = setTimeout(()=> {setLoading(false);}, 3000)
+
+  
 
   const handleClick = (value) => {
+    clearTimeout(timeout)
     console.log('value now =', value)
     let newGood=good, newNeutral=neutral, newBad=bad, newAll=all, newScore=score, newPositive=positive, newTotal = total
     setTotal(1)
@@ -50,27 +56,29 @@ const App = () => {
 
   return (
     <div>
-      <h1>give feedback</h1>
-        <Button handleClick={()=> handleClick('good')} text={'good'}/>
-        <Button handleClick={()=> handleClick('neutral')} text={'neutral'}/>
-        <Button handleClick={()=> handleClick('bad')} text={'bad'}/>
-      <h1>statistics</h1>
-      
-      {total > 0 ? (
-        <div>
-          
-            <Statistics goodValue={good} neutralValue={neutral} badValue={bad} 
-              allValue={all} averageValue={average} positiveValue={positive + '%'}
-              />
-        </div>
+      {loading ? (
+        <Loading text={'Loading...'}/>
         ) : (
           <div>
-            <p>No feedback given</p>
-          </div>
-        )
+            <h1>give feedback</h1>
+              <Button handleClick={()=> handleClick('good')} text={'good'}/>
+              <Button handleClick={()=> handleClick('neutral')} text={'neutral'}/>
+              <Button handleClick={()=> handleClick('bad')} text={'bad'}/>
+            <h1>statistics</h1>
         
-      }
-      
+          {total > 0 ? (
+            <div>
+                <Statistics goodValue={good} neutralValue={neutral} badValue={bad} 
+                  allValue={all} averageValue={average} positiveValue={positive + '%'}
+                  />
+            </div>
+            ) : (
+              <div>
+                <p>No feedback given</p>
+              </div>
+            )}
+            </div>
+        )}
     </div>
   )
 }
