@@ -1,31 +1,19 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import personService from '../../services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
-  const hook = () => {
-    console.log('effect');
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      console.log('promise fulfilled')
-      setPersons(response.data)
+  useEffect( () => {
+    personService
+    .getAll()
+    .then(initialPersons => {
+      setPersons(initialPersons)
     })
-  }
-  useEffect(hook, [])
-
-  const handleContactChange = (event) => {
-    console.log(event.target.value)
-    setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-    console.log(event.target.value)
-    setNewNumber(event.target.value)
-  }
+  }, [])
 
   const addContact = (e) => {
     e.preventDefault();
@@ -44,10 +32,24 @@ const App = () => {
      })
 
      if(!exist){
-      setPersons(persons.concat(personObject))
+      personService
+      .create(personObject)
+      .then(returnedPerson =>{
+        setPersons(persons.concat(returnedPerson))
+      })
       setNewName('')
      }
     
+  }
+
+  const handleContactChange = (event) => {
+    console.log(event.target.value)
+    setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    console.log(event.target.value)
+    setNewNumber(event.target.value)
   }
 
   return (
