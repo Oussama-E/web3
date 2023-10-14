@@ -4,8 +4,8 @@ import { useContext, useState } from 'react'
 import { Context as VotesContext } from 'contexts/VotesContexts'
 
 const App = () => {
-  const [opinions, setOpinions] = useState([]) 
   const [newOpinion, setNewOpinion] = useState('')
+  const { opinions, setOpinions, increaseVote } = useContext(VotesContext)
 
   const addOpinion = (e) => {
     e.preventDefault();
@@ -14,15 +14,15 @@ const App = () => {
       text: newOpinion,
       score : 1
     }
+    setNewOpinion('');
     setOpinions(opinions.concat(opinionObject))
   }
   const handleOpinionChange = (event) => {
     console.log(event.target.value)
     setNewOpinion(event.target.value)
   }
-  const handleVote = (opinion) => {
-    opinion.score += 1; 
-    setOpinions([...opinions]);
+  const handleVote = (opinionId) => {
+    increaseVote(opinionId); 
   }
 
   return (
@@ -41,7 +41,7 @@ const App = () => {
       <h2>Opinions</h2>
         <ul>
           {opinions.map(opinion => 
-            <p key={opinion.id}>{opinion.text} <VoteButton increaseVote={() => handleVote(opinion)}/> {opinion.score}</p>)
+            <p key={opinion.id}>{opinion.text} <VoteButton increaseVote={() => handleVote(opinion.id)}/> {opinion.score}</p>)
             }
         </ul>
     </div> 

@@ -3,16 +3,20 @@ import React, { useState } from "react";
 const Context = React.createContext(null)
 
 const ProviderWrapper = (props) => {
-
-    const [ vote, setVote ] = useState(1)
-    const increaseVote = (v) => {
-        console.log("value before increase = ", vote)
-        const newValue = vote + 1;
-        setVote(newValue)
-    }
+    const [opinions, setOpinions] = useState([]);
+    const increaseVote = (opinionId) => {
+        setOpinions((prevOpinions) =>
+            prevOpinions.map((opinion) =>
+                opinion.id === opinionId
+                    ? { ...opinion, score: opinion.score + 1 }
+                    : opinion
+            )
+        )
+    }   
     
     const exposedValue = {
-        vote,
+        opinions,
+        setOpinions,
         increaseVote,
     }
 
