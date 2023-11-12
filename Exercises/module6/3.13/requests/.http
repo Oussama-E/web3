@@ -1,0 +1,23 @@
+### Get all contacts
+GET http://localhost:3001/api/contact/getAll
+
+### Create a new contact
+POST http://localhost:3001/api/contact
+Content-Type: application/json
+
+{
+    "name": "Moi",
+    "num": "123456"
+}
+
+### Delete a contact by id
+DELETE http://localhost:3001/api/contact/6534f8c7882717336ee2078a
+
+### Update a contact
+PUT http://localhost:3001/api/contact/65325906456b74f5bbf8ca81
+Content-Type: application/json
+
+{
+    "name": "user6",
+    "num": "6666"
+}
