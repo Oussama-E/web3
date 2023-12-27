@@ -9,45 +9,28 @@ const App = () => {
   console.log('rendering with counter value', counter)
 
   const changeCount = (delta) => {
-    console.log('delta =', delta);
-      if(delta>0){
-        const newCount = counter + 1;
-        setCounter(newCount);
-        localStorage.setItem("counter", JSON.stringify(newCount));
-      }
-      else if(delta===0){
-        const newCount = counter - counter;
-        setCounter(counter - counter);
-        localStorage.setItem("counter", JSON.stringify(newCount));
-      }
-      else{
-        const newCount = counter - 1;
-        setCounter(counter - 1);
-        localStorage.setItem("counter", JSON.stringify(newCount));
-      }
-  }
-
-  const handleClick = (e) => {
     console.log('value before', counter);
-    const delta = parseInt(e.target.dataset.delta);
-    changeCount(delta);
+    console.log('delta =', delta);
+    const newCount = counter+delta;
+    setCounter(newCount);
+    localStorage.setItem("counter", JSON.stringify(newCount));
   }
 
   return (
     <div>
       <Display counter = {counter} />
       <Button
-        handleClick={handleClick}
+        changeCount={changeCount}
         delta={1}
         text='plus'
       />
       <Button
-        handleClick={handleClick}
-        delta={0}
+        changeCount={changeCount}
+        delta={-counter}
         text='zero'
       />     
       <Button
-        handleClick={handleClick}
+        changeCount={changeCount}
         delta={-1}
         text='minus'
       />           
