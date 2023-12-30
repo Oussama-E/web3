@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import personService from '../../services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
+  const [filter, setFilter] = useState('')
+  const [condition, setCondition] = useState(false)
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
@@ -52,9 +53,24 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleFilterChange = (e) => {
+    console.log(e.target.value);
+    setFilter(e.target.value)
+    setCondition(true)
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <div>Filter 
+        <input 
+          value={filter}
+          onChange={handleFilterChange}
+        />
+      </div>
+
+      <h3>Add a contact</h3>
       <form onSubmit={addContact}>
         <div>
           name: <input 
@@ -72,12 +88,26 @@ const App = () => {
           <button type="submit" >add</button>
         </div>
       </form>
-      <h2>Numbers</h2>
-        <ul>
+      <h3>Numbers</h3>
+      {condition ? 
+      (
+      <ul>
+        {persons
+        .filter(person => 
+          person.name.toLowerCase().startsWith(filter.toLowerCase()))
+        .map(person=>
+          <p key={person.name}>{person.name}: {person.number}</p>
+        )}
+      </ul>
+      ) 
+      : 
+      (
+      <ul>
           {persons.map(person => 
-            <p key={person.name}>{person.name}: {person.number}</p>)
-            }
-        </ul>
+            <p key={person.name}>{person.name}: {person.number}</p>
+          )}
+      </ul>
+      )}
     </div>
   )
 }

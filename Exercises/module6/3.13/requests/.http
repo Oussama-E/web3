@@ -7,17 +7,17 @@ Content-Type: application/json
 
 {
     "name": "Moi",
-    "num": "123456"
+    "number": "123456"
 }
 
 ### Delete a contact by id
-DELETE http://localhost:3001/api/contact/6534f8c7882717336ee2078a
+DELETE http://localhost:3001/api/contact/658ee73e02f4f645bdf5eb4c
 
 ### Update a contact
 PUT http://localhost:3001/api/contact/65325906456b74f5bbf8ca81
 Content-Type: application/json
 
 {
-    "name": "user6",
+    "name": "user7",
     "num": "6666"
 }

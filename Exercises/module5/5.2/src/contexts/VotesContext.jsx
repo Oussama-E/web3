@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 const Context = React.createContext(null)
 
-const ProviderWrapper = (props) => {
+const ProviderWrapper = ({children}) => {
     const [opinions, setOpinions] = useState([]);
+    const sortedOpinions = [...opinions].sort((a, b) => b.score - a.score);
     const increaseVote = (opinionId) => {
         setOpinions((prevOpinions) =>
             prevOpinions.map((opinion) =>
@@ -13,15 +14,24 @@ const ProviderWrapper = (props) => {
             )
         )
     }   
+
+    const addOpinion = (opinion) => {
+        const opinionObject = {
+        id: opinions.length + 1,
+        text: opinion,
+        score : 1
+        }
+        setOpinions(opinions.concat(opinionObject))
+    }
     
     const exposedValue = {
-        opinions,
-        setOpinions,
+        sortedOpinions,
         increaseVote,
+        addOpinion
     }
 
     return <Context.Provider value={exposedValue}>
-        { props.children }
+        { children }
     </Context.Provider>   
 }
 

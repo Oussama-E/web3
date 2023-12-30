@@ -9,49 +9,26 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  const [all, setAll] = useState(0)
-  const [score, setScore] = useState(0)
-  const [average, setAverage] = useState(0)
-  const [positive, setPositive] = useState(0)
-  const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
-  const timeout = setTimeout(()=> {setLoading(false);}, 3000)
+  const timeout = setTimeout(()=> setLoading(false), 3000)
 
   
 
-  const handleClick = (value) => {
+  const handleClick = (e) => {
     clearTimeout(timeout)
-    console.log('value now =', value)
-    let newGood=good, newNeutral=neutral, newBad=bad, newAll=all, newScore=score, newPositive=positive, newTotal = total
-    setTotal(1)
-    if(value==='good'){
-      newGood+=1
-      newScore+=1
-      setGood(newGood)
-      setScore(newScore)
-      console.log('good => ', newGood)
+    console.log('value now =', e.target.className)
+    if (e.target.className === 'good'){
+      setGood(good+1)
+      console.log('good => ', good+1)
     }
-    else if(value==='neutral'){
-      newNeutral+=1
-      newScore+=0
-      setNeutral(newNeutral)
-      setScore(newScore)
-      console.log('neutral => ', newNeutral)
+    else if (e.target.className === 'neutral'){
+      setNeutral(neutral+1)
+      console.log('neutral => ', neutral+1)
     }
     else{
-      newBad+=1
-      newScore-=1
-      setBad(newBad)
-      setScore(newScore)
-      console.log('bad => ', newBad)
+      setBad(bad+1)
+      console.log('bad => ', bad+1)
     }
-    newAll+=1
-    setAll(newAll)
-    
-    newPositive = (newGood/newAll) * 100
-    setPositive(newPositive)
-    
-    setAverage(newScore/newAll)
   }
 
   return (
@@ -61,23 +38,15 @@ const App = () => {
         ) : (
           <div>
             <h1>give feedback</h1>
-              <Button handleClick={()=> handleClick('good')} text={'good'}/>
-              <Button handleClick={()=> handleClick('neutral')} text={'neutral'}/>
-              <Button handleClick={()=> handleClick('bad')} text={'bad'}/>
+
+            <Button handleClick={handleClick} text='good'/>
+            <Button handleClick={handleClick} text='neutral'/>
+            <Button handleClick={handleClick} text='bad'/>
+
             <h1>statistics</h1>
-        
-          {total > 0 ? (
-            <div>
-                <Statistics goodValue={good} neutralValue={neutral} badValue={bad} 
-                  allValue={all} averageValue={average} positiveValue={positive + '%'}
-                  />
-            </div>
-            ) : (
-              <div>
-                <p>No feedback given</p>
-              </div>
-            )}
-            </div>
+
+            <Statistics goodValue={good} neutralValue={neutral} badValue={bad}/>
+          </div>
         )}
     </div>
   )

@@ -4,5 +4,5 @@
 
 ###
 
-GET {{host}}/api/persons HTTP/1.1
+GET   {{host}}/api/contact/getAll HTTP/1.1
 Accept: application/json

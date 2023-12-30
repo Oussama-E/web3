@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const middlewares = require('./utils/middlewares')
 const contactsRouter = require("./routes/contacts");
 const infoRouter = require("./routes/info");
+const cors = require("cors");
 
 
 
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(middlewares.logger)
 app.use(middlewares.attachCurrentuser)
 
+app.use(cors())
 app.use('/api/contact', contactsRouter)
 app.use(infoRouter)
 

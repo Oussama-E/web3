@@ -5,8 +5,7 @@ const AppLoader= () => {
   return (
     <VoteProviderWrapper>
         <App></App>
- 
-      </VoteProviderWrapper>
+    </VoteProviderWrapper>
   )
 }
 

@@ -1,11 +1,11 @@
-import { ProviderWrapper as VoteProviderWrapper } from "contexts/VotesContexts";
+import { ProviderWrapper as VoteProvider } from "contexts/VotesContext";
 import App from "components/App/App.jsx";
 
 const AppLoader= () => {
   return (
-    <VoteProviderWrapper >
-        <App></App> 
-      </VoteProviderWrapper >
+    <VoteProvider >
+        <App/>
+      </VoteProvider >
   )
 }
 

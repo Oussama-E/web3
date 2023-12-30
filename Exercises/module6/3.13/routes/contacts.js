@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const Contact = require("../models/contact")
-const NotFoundError = require('../utils/NotFoundError')
 
 
 router.get("/getAll", (request, response) => {
@@ -17,7 +16,7 @@ router.get("/getAll", (request, response) => {
   
     const contact = new Contact({
       name: body.name,
-      num: body.num
+      number: body.number
     })
   
     contact.save().then(savedContact => {
@@ -39,7 +38,7 @@ router.get("/getAll", (request, response) => {
   
     const contact = {
       name: body.name,
-      num: body.num
+      number: body.number
     }
   
     Contact.findByIdAndUpdate(request.params.id, contact, {new: true})

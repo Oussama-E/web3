@@ -24,6 +24,17 @@
       "id": 5,
       "name": "Moi",
       "number": "0000"
+    },
+    {
+      "id": 6,
+      "name": "test",
+      "number": "0487"
+    },
+    {
+      "id": 7,
+      "name": "test2",
+      "number": "123",
+      "age": 10
     }
   ]
 }
